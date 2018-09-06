@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <input type=SUBMIT value='Save'>
+        <input type=SUBMIT value='Get a Joke'>
     </form>
 </div>
 
