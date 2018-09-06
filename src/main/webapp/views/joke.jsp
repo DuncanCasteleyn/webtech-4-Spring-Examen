@@ -6,13 +6,13 @@
 <head>
     <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
 
-    <title>Joke generatort</title>
+    <title>Joke generator</title>
 </head>
 
 <body>
 
 <div class='well'>
-    <h1>Make a joke about a specific student</h1>
+    <h1>Make a joke about a specific person</h1>
     <br/>
     <form method=GET action='joke_post' onsubmit='return validate()'>
         <div class='form-group row'>
