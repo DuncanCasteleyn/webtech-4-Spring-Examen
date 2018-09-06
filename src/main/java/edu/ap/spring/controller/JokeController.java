@@ -1,6 +1,8 @@
 package edu.ap.spring.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import edu.ap.spring.jpa.Joke;
+import edu.ap.spring.jpa.JokeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -15,6 +17,7 @@ public class JokeController {
 
     private static final String API_URL = "http://api.icndb.com/jokes/random";
     private RestTemplate restTemplate = new RestTemplate();
+    private JokeRepository jokeRepository;
 
     @Autowired
     public JokeController(JokeRepository jokeRepository) {
@@ -35,6 +38,11 @@ public class JokeController {
         model.addAttribute("lastName", lastName);
 
         JsonNode json = restTemplate.getForObject(API_URL + "?firstName=" + firstName + "&lastName=" + lastName, JsonNode.class);
+        String joke = json.get("value").get("joke").asText();
+        if(!jokeRepository.exists(joke)) {
+            Joke aJoke = new Joke(joke);
+            jokeRepository.save(aJoke);
+        }
 
         model.addAttribute("joke", joke);
         return "joke_post";
